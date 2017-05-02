@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import netaddr
+import ipaddress
 
 
 def _generator_to_list(subnets_generator):
@@ -24,7 +24,7 @@ def get_allowed_prefixes(ip_version):
 
 
 def converter(cidr_range):
-    ip = netaddr.IPNetwork(cidr_range)
+    ip = ipaddress.ip_network(cidr_range)
     allowed_prefixes = get_allowed_prefixes(ip.version)
     cidr_prefix = ip.prefixlen
     if cidr_prefix in allowed_prefixes:
@@ -32,4 +32,4 @@ def converter(cidr_range):
     else:
         for prefix in allowed_prefixes:
             if cidr_prefix < prefix:
-                return _generator_to_list(ip.subnet(prefix))
+                return _generator_to_list(ip.subnets(new_prefix=prefix))

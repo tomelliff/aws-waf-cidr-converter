@@ -1,33 +1,33 @@
+import ipaddress
 import unittest
-
-import netaddr
 
 import converter
 
 
 class TestConvertClassless(unittest.TestCase):
     def test_class_returns_same(self):
-        self.assertEqual(converter.converter('192.168.0.0/24'),
+        self.assertEqual(converter.converter(u'192.168.0.0/24'),
                          ['192.168.0.0/24'])
 
     def test_classless_returns_classes(self):
-        self.assertEqual(converter.converter('192.168.0.0/23'),
+        self.assertEqual(converter.converter(u'192.168.0.0/23'),
                          ['192.168.0.0/24', '192.168.1.0/24'])
-        self.assertEqual(converter.converter('192.168.0.0/30'),
+        self.assertEqual(converter.converter(u'192.168.0.0/30'),
                          ['192.168.0.0/32', '192.168.0.1/32',
                           '192.168.0.2/32', '192.168.0.3/32'])
 
     def test_ip6_class_returns_same(self):
-        self.assertEqual(converter.converter('fe80::dead:beef/64'),
-                         ['fe80::dead:beef/64'])
+        self.assertEqual(converter.converter(u'fe80::/64'),
+                         ['fe80::/64'])
 
     def test_ip6_classless_returns_classes(self):
-        self.assertEqual(converter.converter('fe80::dead:beef/63'),
+        self.assertEqual(converter.converter(u'fe80::/63'),
                          ['fe80::/64', 'fe80:0:0:1::/64'])
 
 
 class TestSubnetGeneratorToList(unittest.TestCase):
-    subnets_generator = netaddr.IPNetwork('192.168.0.0/23').subnet(24)
+    subnets_generator = ipaddress.ip_network(u'192.168.0.0/23').subnets(
+                            new_prefix=24)
 
     def test_returns_list_of_strings(self):
         self.assertEqual(converter._generator_to_list(self.subnets_generator),
@@ -48,7 +48,7 @@ class TestGetAllowedPrefixes(unittest.TestCase):
             converter.get_allowed_prefixes(5)
 
         self.assertTrue('ip_version should be either 4 or 6' in
-                        context.exception)
+                        str(context.exception))
 
 
 if __name__ == '__main__':
