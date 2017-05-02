@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+from __future__ import print_function
+import argparse
+from builtins import str
 import ipaddress
 
 
@@ -33,3 +36,18 @@ def converter(cidr_range):
         for prefix in allowed_prefixes:
             if cidr_prefix < prefix:
                 return _generator_to_list(ip.subnets(new_prefix=prefix))
+
+
+def command_line_handler():
+    parser = argparse.ArgumentParser(
+        description='Converts CIDR ranges into AWS WAF IP Set allowed ranges')
+    parser.add_argument('cidr_range',
+                        help='eg. 192.168.0.0/23')
+    args = parser.parse_args()
+    cidr_ranges = converter(str(args.cidr_range))
+    for cidr_range in cidr_ranges:
+        print(str(cidr_range))
+
+
+if __name__ == '__main__':
+    command_line_handler()

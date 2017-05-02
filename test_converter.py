@@ -1,5 +1,17 @@
+from __future__ import print_function
 import ipaddress
+import sys
 import unittest
+
+try:
+    from unittest.mock import patch
+except ImportError:
+    from mock import patch
+
+try:
+    from io import StringIO
+except ImportError:
+    from StringIO import StringIO
 
 import converter
 
@@ -49,6 +61,15 @@ class TestGetAllowedPrefixes(unittest.TestCase):
 
         self.assertTrue('ip_version should be either 4 or 6' in
                         str(context.exception))
+
+
+class TestCommandLineHandler(unittest.TestCase):
+    def test_prints_ranges_to_stdout(self):
+        sys.argv[1] = u'192.168.0.0/23'
+        with patch('sys.stdout', new=StringIO()) as fakeOutput:
+            converter.command_line_handler()
+            self.assertEqual(fakeOutput.getvalue().strip(),
+                             '192.168.0.0/24\n192.168.1.0/24')
 
 
 if __name__ == '__main__':
