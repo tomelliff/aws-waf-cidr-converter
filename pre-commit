@@ -2,4 +2,4 @@
 
 coverage run --source=converter -m unittest discover
 coverage report -m
-flake8 --exclude .git,*.pyc,env
+flake8 --exclude .git,env,.tox,__pycache__,*.pyc

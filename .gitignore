@@ -4,5 +4,9 @@ env/
 # Compiled binaries
 *.pyc
 
+# Generated files
+MANIFEST
+
 # Unit test / coverage reports
 .coverage
+.tox/

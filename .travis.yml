@@ -7,6 +7,6 @@ install:
 - pip install coveralls
 script:
 - coverage run --source=converter -m unittest discover
-- flake8 --exclude .git,*.pyc,env
+- flake8 --exclude .git,env,.tox,__pycache__,*.pyc
 after_success:
 - coveralls
