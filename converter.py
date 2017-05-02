@@ -27,7 +27,7 @@ def get_allowed_prefixes(ip_version):
 
 
 def converter(cidr_range):
-    ip = ipaddress.ip_network(cidr_range)
+    ip = ipaddress.ip_network(cidr_range, strict=False)
     allowed_prefixes = get_allowed_prefixes(ip.version)
     cidr_prefix = ip.prefixlen
     if cidr_prefix in allowed_prefixes:
