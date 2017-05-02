@@ -16,23 +16,23 @@ except ImportError:
 import converter
 
 
-class TestConvertClassless(unittest.TestCase):
-    def test_class_returns_same(self):
+class TestConvertCIDRRange(unittest.TestCase):
+    def test_ip4_allowed_range_returns_same(self):
         self.assertEqual(converter.converter(u'192.168.0.0/24'),
                          ['192.168.0.0/24'])
 
-    def test_classless_returns_classes(self):
+    def test_ip4_range_returns_allowed_range(self):
         self.assertEqual(converter.converter(u'192.168.0.0/23'),
                          ['192.168.0.0/24', '192.168.1.0/24'])
         self.assertEqual(converter.converter(u'192.168.0.0/30'),
                          ['192.168.0.0/32', '192.168.0.1/32',
                           '192.168.0.2/32', '192.168.0.3/32'])
 
-    def test_ip6_class_returns_same(self):
+    def test_ip6_allowed_range_returns_same(self):
         self.assertEqual(converter.converter(u'fe80::/64'),
                          ['fe80::/64'])
 
-    def test_ip6_classless_returns_classes(self):
+    def test_ip6_range_returns_allowed_range(self):
         self.assertEqual(converter.converter(u'fe80::/63'),
                          ['fe80::/64', 'fe80:0:0:1::/64'])
 

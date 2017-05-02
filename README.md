@@ -1,6 +1,6 @@
 # AWS WAF CIDR converter
 
-[![Build Status](https://travis-ci.org/tomelliff/cidr-classful-converter.svg?branch=master)](https://travis-ci.org/tomelliff/cidr-classful-converter) [![Coverage Status](https://coveralls.io/repos/github/tomelliff/cidr-classful-converter/badge.svg?branch=master)](https://coveralls.io/github/tomelliff/cidr-classful-converter?branch=master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5d6cb0375a2544dd90bdb215f0fecf54)](https://www.codacy.com/app/tomelliff/cidr-classful-converter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tomelliff/cidr-classful-converter&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/tomelliff/aws-waf-cidr-converter.svg?branch=master)](https://travis-ci.org/tomelliff/aws-waf-cidr-converter) [![Coverage Status](https://coveralls.io/repos/github/tomelliff/aws-waf-cidr-converter/badge.svg?branch=master)](https://coveralls.io/github/tomelliff/aws-waf-cidr-converter?branch=master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5b28add6f9f84c728cbc01908f80dc81)](https://www.codacy.com/app/tomelliff/aws-waf-cidr-converter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tomelliff/aws-waf-cidr-converter&amp;utm_campaign=Badge_Grade)
 
 Conversion between typical CIDR ranges and the [ranges allowed by AWS WAF](http://docs.aws.amazon.com/waf/latest/developerguide/web-acl-ip-conditions.html):
 
@@ -48,7 +48,7 @@ tox
 
 Obviously you will need [`tox`](https://pypi.python.org/pypi/tox) available but this will install all dependencies for each environment in a virtual environment.
 
-There is a [pre-commit hook](https://github.com/tomelliff/cidr-classful-converter/blob/master/pre-commit) available that will automatically run the tests for you. Simply copy it into your `.git/hooks` folder to install it:
+There is a [pre-commit hook](https://github.com/tomelliff/aws-waf-cidr-converter/blob/master/pre-commit) available that will automatically run the tests for you. Simply copy it into your `.git/hooks` folder to install it:
 
 ```sh
 cp pre-commit .git/hooks/
