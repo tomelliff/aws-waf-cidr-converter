@@ -12,9 +12,20 @@ def _generator_to_list(subnets_generator):
     return subnets
 
 
+def get_allowed_prefixes(ip_version):
+    allowed_ip4_prefixes = [8, 16, 24, 32]
+    allowed_ip6_prefixes = [16, 24, 32, 56, 64, 128]
+    if ip_version == 4:
+        return allowed_ip4_prefixes
+    elif ip_version == 6:
+        return allowed_ip6_prefixes
+    else:
+        raise ValueError('ip_version should be either 4 or 6')
+
+
 def converter(cidr_range):
-    allowed_prefixes = [8, 16, 24, 32]
     ip = netaddr.IPNetwork(cidr_range)
+    allowed_prefixes = get_allowed_prefixes(ip.version)
     cidr_prefix = ip.prefixlen
     if cidr_prefix in allowed_prefixes:
         return [cidr_range]
